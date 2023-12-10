@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce_app_ui/models/category_card_model.dart';
 import 'package:e_commerce_app_ui/utils/color/app_color.dart';
 import 'package:e_commerce_app_ui/view_models/category_cubit/category_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class CategoryTabView extends StatelessWidget {
         else if(state is CategoryLoaded){
           return SingleChildScrollView(
           child: Column(
-            children: categoreCardData.map((item) {
+            children: state.CategoreList.map((item) {
               return Builder(builder: (BuildContext context) {
                 return Column(
                   children: [
