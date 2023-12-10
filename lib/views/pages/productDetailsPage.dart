@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app_ui/utils/color/app_color.dart';
 import 'package:e_commerce_app_ui/view_models/cubit/product_details_page_cubit.dart';
 import 'package:e_commerce_app_ui/views/widgets/number_widget.dart';
+import 'package:e_commerce_app_ui/views/widgets/prise_widget.dart';
 import 'package:e_commerce_app_ui/views/widgets/size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,36 +37,41 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
              return Scaffold(
               body: Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                  state.item[widget.index].imageUrl),
-              fit: BoxFit.cover,
-            )),
-            child: Column(
+           
+            child: Stack(
+              alignment: AlignmentDirectional.bottomStart,
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(Icons.arrow_back_ios)),
-                    const Text(
-                      " Detail Product",
-                      style: TextStyle(color: Colors.white),
+                PositionedDirectional(
+                  top: 0,
+                  start:0 ,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height*0.4,
+                    child: CachedNetworkImage(imageUrl:state.item[widget.index].imageUrl)
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border))
-                  ],
                 ),
-                const Spacer(),
+                PositionedDirectional(
+                  top: 10,
+                  start:0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(Icons.arrow_back_ios)),
+                      const Text(
+                        " Detail Product",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.favorite_border))
+                    ],
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   width: double.infinity,
@@ -185,12 +191,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Center(
-                            child: Text("\$${state.item[widget.index].prise}",
+                        child: Row(
+                            children: [
+                              Text("\$}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
-                                    color: Theme.of(context).primaryColor))),
+                                    color: Theme.of(context).primaryColor)),
+                                    PriseWidget(quantity: _numberValueNotifier, prise: state.item[widget.index].prise)
+                                    ]
+                                    ),
                       ),
                       Expanded(
                         child: ElevatedButton(
