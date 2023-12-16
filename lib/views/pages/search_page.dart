@@ -1,9 +1,9 @@
 import 'package:e_commerce_app_ui/utils/color/app_color.dart';
-import 'package:e_commerce_app_ui/view_models/cubit/search_page_cubit.dart';
 import 'package:e_commerce_app_ui/views/widgets/last_sarsch_widget.dart';
 import 'package:e_commerce_app_ui/views/widgets/popular_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../view_models/search_page_cubit/search_page_cubit.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -38,7 +38,7 @@ class SearchPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       borderSide:
                           BorderSide(color: Theme.of(context).primaryColor)),
-                  hintText: "Enter ",
+                  hintText: "Search something... ",
                   hintStyle: Theme.of(context)
                       .textTheme
                       .labelLarge!

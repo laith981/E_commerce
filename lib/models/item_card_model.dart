@@ -1,5 +1,5 @@
 class ItemCardModel{
-  ItemCardModel(  {required this.imageUrl, required this.id, required this.name, required this.categore, required this.prise,this.evaluation=1.0,required this.description,});
+  ItemCardModel(   {required this.imageUrl, required this.id, required this.name, required this.categore, required this.prise,this.evaluation=1.0,required this.description,this.isFavorite=false, this.addToCart=false, this.quantity,});
   final String imageUrl;
   final String description;
   final String id;
@@ -7,6 +7,37 @@ class ItemCardModel{
   final String categore;
   final double evaluation;
   final double prise;
+  final bool isFavorite;
+  final bool addToCart;
+  final int? quantity;
+  ItemCardModel copyWith({
+     String? imageUrl,
+     String? description,
+     String? id,
+     String? name,
+     String? categore,
+     double? evaluation,
+     double? prise,
+     bool? isFavorite,
+     bool? addToCard,
+     int? quantity,
+  }){
+    
+    return ItemCardModel(
+      imageUrl: imageUrl?? this.imageUrl, 
+      id: id??this.id, 
+      name: name??this.name,
+      categore: categore??this.categore, 
+      prise: prise??this.prise, 
+      description: description??this.description,
+      isFavorite:isFavorite?? this.isFavorite,
+      addToCart:addToCard??this.addToCart ,
+      quantity:quantity??this.quantity ,
+      evaluation:evaluation??this.evaluation ,
+      );
+    
+  }
+  
 }
 List<ItemCardModel> itemCardLIst=[
   ItemCardModel(imageUrl:"https://contents.mediadecathlon.com/p2437444/067f3912cb656b48ec7cf255da79de60/p2437444.jpg?format=auto&quality=70&f=650x0" , id:"1" , name :"pullover" , categore:"clothes" , prise: 58.9,evaluation: 4.8, description: 'pulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpulloverpullover'),

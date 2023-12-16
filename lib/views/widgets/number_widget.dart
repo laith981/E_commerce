@@ -19,6 +19,11 @@ class _NumberWidgetState extends State<NumberWidget> {
     });
   }
   @override
+  void dispose() {
+    super.dispose();
+    widget.number.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Text("${widget.number.value}");
   }

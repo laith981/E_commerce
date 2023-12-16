@@ -20,6 +20,12 @@ class _PriseWidgetState extends State<PriseWidget> {
     });
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.quantity.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Text("${widget.quantity.value*widget.prise}",
                                 style: const TextStyle(

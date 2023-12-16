@@ -7,7 +7,8 @@ import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'item_card_widget.dart';
 
 class HomeTabView extends StatelessWidget {
-  const HomeTabView({super.key});
+  const HomeTabView({super.key, });
+  
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +101,10 @@ class HomeTabView extends StatelessWidget {
                           name: state.products[i].name,
                           categore: state.products[i].categore,
                           prise: state.products[i].prise,
-                          imageUrl: state.products[i].imageUrl),
+                          imageUrl: state.products[i].imageUrl, 
+                          index: i, 
+                                                  
+                          ),
                     );
                   })
             ],

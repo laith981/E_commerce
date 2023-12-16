@@ -10,6 +10,13 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
+  void favariteButton(String itemId){
+    final index=itemCardLIst.indexWhere((item) => item.id==itemId);
+    itemCardLIst[index]=itemCardLIst[index].copyWith(
+      isFavorite: !itemCardLIst[index].isFavorite
+    ); 
+    emit(HomeLoaded(products:itemCardLIst , carouselItem:carouselList ));
+  }
   void getHomeData(){
     emit( HomeLoading());
     Future.delayed(const Duration(seconds: 2),(){

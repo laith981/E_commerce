@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app_ui/utils/color/app_color.dart';
-import 'package:e_commerce_app_ui/view_models/cubit/product_details_page_cubit.dart';
+import 'package:e_commerce_app_ui/view_models/product_details_page_cubit/product_details_page_cubit.dart';
 import 'package:e_commerce_app_ui/views/widgets/number_widget.dart';
+import 'package:e_commerce_app_ui/views/widgets/prise_widget.dart';
 import 'package:e_commerce_app_ui/views/widgets/size_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/item_card_model.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key, required this.index});
@@ -61,8 +64,19 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border))
+                        onPressed: () {
+                           setState(() {
+                    itemCardLIst[widget.index]=itemCardLIst[widget.index].copyWith(
+                      isFavorite:!itemCardLIst[widget.index].isFavorite
+                    );
+                  });
+                        },
+                        icon:itemCardLIst[widget.index].isFavorite? Icon(
+                  Icons.favorite_sharp,
+                  color:AppColors().favariteIconColor
+                  ): 
+                  const Icon(Icons.favorite_border)
+                  )
                   ],
                 ),
                 const Spacer(),
@@ -185,12 +199,17 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Center(
-                            child: Text("\$${state.item[widget.index].prise}",
+                        child: Row(
+                            children:[ 
+                              Text("\$",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
-                                    color: Theme.of(context).primaryColor))),
+                                    color: Theme.of(context).primaryColor)
+                                    ),
+                                    PriseWidget(quantity: _numberValueNotifier, prise: state.item[widget.index].prise)
+                                    ]
+                                    ),
                       ),
                       Expanded(
                         child: ElevatedButton(

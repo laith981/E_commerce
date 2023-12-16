@@ -1,14 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_app_ui/models/item_card_model.dart';
 import 'package:e_commerce_app_ui/utils/color/app_color.dart';
 import 'package:flutter/material.dart';
 
-class ItemCardWidget extends StatelessWidget {
-  const ItemCardWidget({super.key, required this.name, required this.categore, required this.prise, required this.imageUrl});
+
+class ItemCardWidget extends StatefulWidget {
+  const ItemCardWidget({super.key, required this.name, required this.categore, required this.prise, required this.imageUrl, required this.index,});
   final String name;
   final String categore;
   final String imageUrl;
   final double prise;
+  final int index;
 
+  @override
+  State<ItemCardWidget> createState() => _ItemCardWidgetState();
+}
+
+class _ItemCardWidgetState extends State<ItemCardWidget> {
+ 
   @override
   Widget build(BuildContext context) {
     
@@ -29,23 +38,23 @@ class ItemCardWidget extends StatelessWidget {
                   
                 ),
                 child: CachedNetworkImage(
-                  imageUrl: imageUrl,
+                  imageUrl: widget.imageUrl,
                   fit: BoxFit.fill,
                   ),
               ),
-              Text(name,
+              Text(widget.name,
               style: const TextStyle(
                 
                 fontSize: 20
               ),
               ),
-              Text(categore,
+              Text(widget.categore,
               style:  const TextStyle(
                 color: Colors.grey,
                 fontSize: 15
               ),
               ),
-              Text("$prise\$",
+              Text("${widget.prise}\$",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15
@@ -59,19 +68,26 @@ class ItemCardWidget extends StatelessWidget {
         Positioned(
           top:10 ,
           right: 10, 
-          child: Opacity(
-            opacity: 0.2,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color:AppColors().grey ,
-              ),
-              
-              child: IconButton(
-                onPressed: (){},
-                 icon: const Icon(Icons.favorite_border) 
-                 ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color:AppColors().grey ,
             ),
+            
+            child: IconButton(
+              onPressed:(){
+                setState(() {
+                  itemCardLIst[widget.index]=itemCardLIst[widget.index].copyWith(
+                     isFavorite: !itemCardLIst[widget.index].isFavorite
+                      ); 
+                });
+              } ,
+               icon:itemCardLIst[widget.index].isFavorite? Icon(
+                Icons.favorite_sharp,
+                color:AppColors().favariteIconColor
+                ): 
+                const Icon(Icons.favorite_border) 
+               ),
           )
           )
       ],
